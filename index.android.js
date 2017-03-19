@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 export default class AwesomeProject extends Component {
@@ -17,14 +18,11 @@ export default class AwesomeProject extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Syauqi Rahmat Sugara
         </Text>
+        <Image source={require('./img/syauqi.png')} style={{width: 120, height: 150}}/>
         <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
+          The player of Basilischi Squad
         </Text>
       </View>
     );
