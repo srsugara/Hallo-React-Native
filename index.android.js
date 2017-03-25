@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+'use strict';
 
 import React, { Component } from 'react';
 import {
@@ -13,8 +14,34 @@ import {
   Image
 } from 'react-native';
 
-export default class AwesomeProject extends Component {
-  render() {
+// The URL for the `posts` endpoint provided by WP JSON API
+var DATA={};
+var REQUEST_URL = 'https://jsonplaceholder.typicode.com/posts/1';
+
+var AwesomeProject = React.createClass({
+  getInitialState: function() {
+    return {
+      thought: DATA,
+    };
+  },
+  // Automatically called by react when this component has finished mounting.
+  componentDidMount: function() {
+    this.fetchData();
+  },
+  // This is where the magic happens! Fetches the data from our API and updates the application state.
+  fetchData: function() {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
+        this.setState({
+          thought: { title: responseData.title, body: responseData.body },
+        });
+      })
+      .done();
+  },
+
+  render: function() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -24,10 +51,19 @@ export default class AwesomeProject extends Component {
         <Text style={styles.instructions}>
           The player of Basilischi Squad
         </Text>
+        <Text style={styles.welcome}>
+          Get one data from API
+        </Text>
+        <Text style={styles.instructions}>
+          Title : {this.state.thought.title}
+        </Text>
+        <Text style={styles.instructions}>
+          Body : {this.state.thought.body}
+        </Text>
       </View>
     );
   }
-}
+});
 
 const styles = StyleSheet.create({
   container: {
